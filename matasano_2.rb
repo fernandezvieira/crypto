@@ -33,13 +33,13 @@ def challenge_2
   print_result(result, 2)
 end
 
-#Checks if a byte is a printable ASCII character (between 32 126)
+# checks if a byte is a printable ASCII character (between 32 126)
 def printable_byte?(candidate)
   # char 10 is the newline char
   candidate.chars.all? {|char| char.ord.between?(32,126) || char.ord == 10}
 end
 
-#Score against english language frequency distribution
+# score against english language frequency distribution
 def frequency_score(str)
   str = str.downcase
   freqs = {"e"=> 0.12702,
@@ -73,7 +73,6 @@ def frequency_score(str)
   ('a'..'z').reduce(0) {|score, char| score + (freqs[char] - (str.count(char) / str.length.to_f)).abs}
 end
 
-#Byte array to str
 def bytes_to_str(arr)
   arr.pack("c*")
 end
