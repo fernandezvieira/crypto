@@ -19,8 +19,16 @@ def unhex(str)
   [str].pack("H*")
 end
 
+def xor_bytes(bytes, bytes_2)
+  bytes.zip(bytes_2).map { |l,r| l^r }
+end
+
 def xor(str1, str2)
-  str1.bytes.zip(str2.bytes).map {|l,r|l^r}
+  xor_bytes(str1.bytes, str2.bytes)
+end
+
+def repeating_key_xor(string, repeating_key)
+  xor_bytes(string.bytes, repeating_key.bytes.cycle)
 end
 
 def challenge_2
@@ -111,9 +119,22 @@ def challenge_4
 end
 
 def challenge_5
+  text = "Burning 'em, if you ain't quick and nimble\nI go crazy when I hear a cymbal"
+
+  result = repeating_key_xor(text, "ICE").pack("c*").unpack("H*")
+
+  result = result.first == "0b3637272a2b2e63622c2e69692a23693a2a3c6324202d623d63343c2a26226324272765272a282b2f20430a652e2c652a3124333a653e2b2027630c692b20283165286326302e27282f"
+
+  print_result(result, 5)
 end
 
-challenge_1
-challenge_2
-challenge_3
-challenge_4
+def challenge_6
+
+end
+
+# challenge_1
+# challenge_2
+# challenge_3
+# challenge_4
+# challenge_5
+# challenge_6
