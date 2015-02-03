@@ -292,7 +292,7 @@ def strip_padding(block)
     raise "WTF?" if block[(block.size - last_byte) + i] != last_byte
   end
 
-  return block[0..block.size - last_byte-1]
+  return block[0...block.size - last_byte]
 end
 
 def challenge_10
